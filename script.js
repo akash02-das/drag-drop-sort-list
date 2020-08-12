@@ -59,6 +59,7 @@ function dragDrop() {
     this.classList.remove('over');
 }
 
+// Swap list items that are drag and drop
 function swapItems(fromIndex, toIndex) {
     const itemOne = listItems[fromIndex].querySelector('.draggable');
     const itemTwo = listItems[toIndex].querySelector('.draggable');
@@ -73,6 +74,20 @@ function dragEnter() {
 
 function dragLeave() {
     this.classList.remove('over');
+}
+
+// Check the order of list items on button click
+function checkOrder() {
+    listItems.forEach((listItem, index) => {
+        const personName = listItem.querySelector('.draggable').innerText.trim();
+
+        if (personName !== richestPeople[index]) {
+            listItem.classList.add('wrong');
+        } else {
+            listItem.classList.add('right');
+            listItem.classList.remove('wrong');
+        }
+    });
 }
 
 function addEventListeners() {
@@ -90,3 +105,5 @@ function addEventListeners() {
         item.addEventListener('dragleave', dragLeave);
     });
 }
+
+checkBtn.addEventListener('click', checkOrder);
